@@ -80,10 +80,7 @@ prepared statement. That function has a method that will unprepare the statement
       query : "select * from table where name = @firstname",
       inputs : {
         firstname : Sql.driver.NVarChar
-      },
-      params : [
-        { firstname : "Bob" }
-      ]
+      }
     }
 
     // Sync-style
