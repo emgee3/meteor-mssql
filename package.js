@@ -1,7 +1,7 @@
 Package.describe({
-  name: "mssql",
+  name: "emgee:mssql",
   summary: "mssql wrapper: non-reactive SQL Server package",
-  version: "1.3.0_1",
+  version: "1.3.0_2",
   git: "https://github.com/emgee3/meteor-mssql.git",
   documentation: "README.md"
 });

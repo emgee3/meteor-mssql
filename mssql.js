@@ -17,7 +17,7 @@ if (! Meteor.settings.database ||
 
 
 
-Sql.q = function (query, opts) {
+Sql.q = function (query) {
   var request = new sql.Request(Sql.connection);
   var myRequest = Meteor.wrapAsync(request.query, request);
   return myRequest(query);
@@ -28,6 +28,7 @@ Sql.q = function (query, opts) {
 Sql.ps = Meteor.wrapAsync(prepareStatement);
 
 function prepareStatement (opts, cb) {
+  opts = opts || {};
 
   var request = new sql.PreparedStatement(Sql.connection);
 
@@ -50,6 +51,8 @@ function prepareStatement (opts, cb) {
 Sql.sp = Meteor.wrapAsync(storedProcedure);
 
 function storedProcedure (opts, cb) {
+  opts = opts || {};
+
   var request = new sql.Request(Sql.connection);
 
   _.each(opts.inputs, function (i) {

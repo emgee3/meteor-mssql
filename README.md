@@ -5,7 +5,8 @@ non-reactive queries against a Microsoft SQL Server. The wrapper provides three 
 functions, although but the `mssql` library is exported as `Sql.driver` server-side, so any
 feature in the `mssql` library can be called.
 
-The API is available as `Sql` and is available server-side only.
+The API is available as `Sql` and is available server-side only. Wrap in a method to deliver
+results to the client.
 
 ## Settings
 
