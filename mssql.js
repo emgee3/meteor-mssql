@@ -6,8 +6,7 @@ Sql.driver = sql;
 
 if (! Meteor.settings.database ||
     ! Meteor.settings.database.user ||
-    ! Meteor.settings.database.password ||
-    ! Meteor.settings.database.database) {
+    ! Meteor.settings.database.password) {
   console.error('mssql: Database unconfigured');
 } else {
   Sql.connection = new Sql.driver.Connection(Meteor.settings.database, function (err) {
