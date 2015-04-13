@@ -49,9 +49,9 @@ this should rarely be done. Better is a prepared statement, or stored procedure.
     // Or with inputs
     try {
       var res = Sql.q(query, [
-        { name : 'param1', type : Sql.driver.TYPE, value : 'My Value' },
-        { name : 'param2', type : Sql.driver.TYPE, value : 'My Value' },
-        { name : 'param3', type : Sql.driver.TYPE, value : 'My Value' },
+        { name : 'param1', type : Sql.driver.NVarChar, value : 'My Value' },
+        { name : 'param2', type : Sql.driver.NVarChar, value : 'My Value' },
+        { name : 'param3', type : Sql.driver.NVarChar, value : 'My Value' },
       ]);
     } catch (e) {
     }
