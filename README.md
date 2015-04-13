@@ -38,19 +38,23 @@ Database connection settings are pulled from `Meteor.settings`, using the follow
 This allows a query to directly be run against the database. For SQL injection purposes,
 this should rarely be done. Better is a prepared statement, or stored procedure.
 
-#### Params: (query, callback)
+#### Params: (query : String, inputs : [ { name : 'param1', type : Sql.driver.TYPE, value : 'My Value' }, ... ])
 
 ```javascript
-    // Sync-style
     try {
       var res = Sql.q(query);
     } catch (e) {
     }
 
-    // Async-style
-    Sql.q(query, function (err, res) {
-
-    });
+    // Or with inputs
+    try {
+      var res = Sql.q(query, [
+        { name : 'param1', type : Sql.driver.TYPE, value : 'My Value' },
+        { name : 'param2', type : Sql.driver.TYPE, value : 'My Value' },
+        { name : 'param3', type : Sql.driver.TYPE, value : 'My Value' },
+      ]);
+    } catch (e) {
+    }
 ```
 
 
