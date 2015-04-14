@@ -36,9 +36,11 @@ Database connection settings are pulled from `Meteor.settings`, using the follow
 ### `Sql.q` — Query
 
 This allows a query to directly be run against the database. For SQL injection purposes,
-this should rarely be done. Better is a prepared statement, or stored procedure.
+this should rarely be done and should be specified with inputs, which offers some protection.
+Better is a prepared statement, or stored procedure.
 
-#### Params: (query, callback)
+##### Params:
+```(query : String, inputs : [ { name : 'param1', type : Sql.driver.TYPE, value : 'My Value' }, ... ], optionalCallback)```
 
 ```javascript
     // Sync-style
@@ -47,8 +49,23 @@ this should rarely be done. Better is a prepared statement, or stored procedure.
     } catch (e) {
     }
 
+    // Sync-style with inputs
+    try {
+      var res = Sql.q(query, [
+        { name : 'param1', type : Sql.driver.NVarChar, value : 'My Value' },
+        { name : 'param2', type : Sql.driver.NVarChar, value : 'My Value' },
+        { name : 'param3', type : Sql.driver.NVarChar, value : 'My Value' },
+      ]);
+    } catch (e) {
+    }
+
     // Async-style
     Sql.q(query, function (err, res) {
+
+    });
+
+    // Async-style with inputs
+    Sql.q(query, { name : 'param1', type : Sql.driver.NVarChar, value : 'My Value' }, function (err, res) {
 
     });
 ```
@@ -56,7 +73,10 @@ this should rarely be done. Better is a prepared statement, or stored procedure.
 
 ### `Sql.ps` - Prepared Statement
 
-#### Params: `{ query : String, inputs : { param1 : Sql.driver.TYPE, ..., paramN : Sql.driver.TYPE } }`
+##### Params:
+```javascript
+({ query : String, inputs : { param1 : Sql.driver.TYPE, ..., paramN : Sql.driver.TYPE } }, optionalCallback)
+```
 
 > Prepared statements are resilient against SQL injection, because parameter values,
 > which are transmitted later using a different protocol, need not be correctly escaped.
@@ -100,7 +120,10 @@ prepared statement. That function has a method that will unprepare the statement
 
 ### `Sql.sp` - Stored Procedure
 
-Params: ```{ sp : String, inputs : [ { name : String, type : Sql.driver.TYPE, value : val }, ... ], outputs : { key : value } }```
+##### Params:
+```javascript
+({ sp : String, inputs : [ { name : String, type : Sql.driver.TYPE, value : val }, ... ], outputs : { key : value } }, optionalCallback)
+```
 
 ```javascript
     {
