@@ -16,16 +16,28 @@ if (! Meteor.settings.database ||
 
 
 
-Sql.q = function (query, inputs) {
-  var request = new sql.Request(Sql.connection);
-  if (inputs) {
-    _.each(inputs, function (e) {
-      if (e.type) request.input(e.name, e.type, e.value);
-      else        request.input(e.name, e.value);
-    });
+Sql.q = Meteor.wrapAsync(sqlQuery);
+
+function sqlQuery (query, inputs, cb) {
+  try {
+    if (typeof inputs === 'function') {
+      cb = inputs;
+      inputs = null;
+    }
+
+    var request = new sql.Request(Sql.connection);
+    if (inputs) {
+      _.each(inputs, function (e) {
+        if (e.type) request.input(e.name, e.type, e.value);
+        else        request.input(e.name, e.value);
+      });
+    }
+
+    request.query(query, cb);
   }
-  var myRequest = Meteor.wrapAsync(request.query, request);
-  return myRequest(query);
+  catch (e) {
+    return cb(e);
+  }
 }
 
 
