@@ -40,7 +40,9 @@ this should rarely be done and should be specified with inputs, which offers som
 Better is a prepared statement, or stored procedure.
 
 ##### Params:
-```(query : String, inputs : [ { name : 'param1', type : Sql.driver.TYPE, value : 'My Value' }, ... ], optionalCallback)```
+```javascript
+(query : String, inputs : [ { name : 'param1', type : Sql.driver.TYPE, value : 'My Value' }, ... ], optionalCallback)
+```
 
 ```javascript
     // Sync-style
