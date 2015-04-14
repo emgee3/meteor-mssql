@@ -71,6 +71,7 @@ Sql.sp = Meteor.wrapAsync(storedProcedure);
 function storedProcedure (opts, cb) {
   opts = opts || {};
   opts.inputs = opts.inputs || {};
+  opts.outputs = opts.outputs || {};
 
   var request = new sql.Request(Sql.connection);
 
