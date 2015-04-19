@@ -116,7 +116,7 @@ prepared statement. That function has a method that will unprepare the statement
     var result  = query({ firstname : "Bob" });
     var result2 = query({ firstname : "John" });
 
-    result.unprepare();
+    query.unprepare();
 ```
 
 
