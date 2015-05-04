@@ -42,6 +42,8 @@ Better is a prepared statement, or stored procedure.
 ##### Params:
 ```javascript
 (query : String, inputs : [ { name : 'param1', type : Sql.driver.TYPE, value : 'My Value' }, ... ], optionalCallback)
+or
+(query : String, inputs : { myParam1 : 'My Value', paramNumba2 : 'This val', ... }, optionalCallback)
 ```
 
 ```javascript
