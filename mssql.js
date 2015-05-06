@@ -27,10 +27,17 @@ function sqlQuery (query, inputs, cb) {
 
     var request = new sql.Request(Sql.connection);
     if (inputs) {
-      _.each(inputs, function (e) {
-        if (e.type) request.input(e.name, e.type, e.value);
-        else        request.input(e.name, e.value);
-      });
+      if (_.isArray(inputs)) {
+        _.each(inputs, function (e) {
+          if (e.type) request.input(e.name, e.type, e.value);
+          else        request.input(e.name, e.value);
+        });
+      }
+      else if (_.isObject(inputs)) {
+        _.each(inputs, function (e, k) {
+          request.input(k, e);
+        });
+      }
     }
 
     request.query(query, cb);
