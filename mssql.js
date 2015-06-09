@@ -86,7 +86,7 @@ function storedProcedure (opts, cb) {
     request.input(i.name, i.type, i.value);
   });
 
-  _.each(opts.outputs, function (name, type) {
+  _.each(opts.outputs, function (type, name) {
     request.output(name, type);
   });
 
