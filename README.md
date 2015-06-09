@@ -1,16 +1,18 @@
 # `mssql` for Meteor
 
-A wrapper for the [mssql](https://github.com/patriksimek/node-mssql) node library. Provides
-non-reactive queries against a Microsoft SQL Server. The wrapper provides three Meteor.wrapAsync
-functions, although but the `mssql` library is exported as `Sql.driver` server-side, so any
-feature in the `mssql` library can be called.
+A wrapper for the [mssql](https://github.com/patriksimek/node-mssql) node
+library. Provides non-reactive queries against a Microsoft SQL Server. The
+wrapper provides three `Meteor.wrapAsync` functions, although but the `mssql`
+library is exported as `Sql.driver` server-side, so any feature in the `mssql`
+library can be called.
 
-The API is available as `Sql` and is available server-side only. Wrap in a method to deliver
-results to the client.
+The API is available as `Sql` and is available server-side only. Wrap in a
+method to deliver results to the client.
 
 ## Settings
 
-Database connection settings are pulled from `Meteor.settings`, using the following keys:
+Database connection settings are pulled from `Meteor.settings`, using the
+following keys:
 
 ```json
     {
@@ -35,9 +37,10 @@ Database connection settings are pulled from `Meteor.settings`, using the follow
 
 ### `Sql.q` — Query
 
-This allows a query to directly be run against the database. For SQL injection purposes,
-this should rarely be done and should be specified with inputs, which offers some protection.
-Better is a prepared statement, or stored procedure.
+This allows a query to directly be run against the database. For SQL
+injection purposes, this should rarely be done and should be specified with
+inputs, which offers some protection. Better is a prepared statement, or
+stored procedure.
 
 ##### Params:
 ```javascript
@@ -130,7 +133,7 @@ prepared statement. That function has a method that will unprepare the statement
 ```
 
 ```javascript
-    {
+    var opts = {
       sp : "SP_name",
       inputs : [ {
         name  : "param1",
