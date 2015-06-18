@@ -11,6 +11,7 @@ Npm.depends({ "mssql" : "1.3.0" });
 Package.onUse(function(api) {
   api.versionsFrom("1.0.3.1");
   api.versionsFrom("1.1.0.2");
+  api.use('underscore');
   api.addFiles("mssql.js", "server");
   api.export("Sql", "server");
 });
