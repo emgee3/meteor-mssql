@@ -29,6 +29,9 @@ following keys:
     }
 ```
 
+*Note with Azure MSSQL DBAAS*
+Azure requires an encrypted connection, so under `options` you will need to add `"encrypt":true` for it to work. 
+
 ## API
 
 ### `Sql.driver` — `mssql` npm module
