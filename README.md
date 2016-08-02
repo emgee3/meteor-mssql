@@ -40,10 +40,7 @@ Azure requires an encrypted connection, so under `options` you will need to add 
 
 ### `Sql.q` — Query
 
-This allows a query to directly be run against the database. For SQL
-injection purposes, this should rarely be done and should be specified with
-inputs, which offers some protection. Better is a prepared statement, or
-stored procedure.
+This allows a query to directly be run against the database. Supports parameterization.
 
 ##### Params:
 ```javascript
@@ -88,21 +85,10 @@ or
 ({ query : String, inputs : { param1 : Sql.driver.TYPE, ..., paramN : Sql.driver.TYPE } }, optionalCallback)
 ```
 
-> Prepared statements are resilient against SQL injection, because parameter values,
-> which are transmitted later using a different protocol, need not be correctly escaped.
-> If the original statement template is not derived from external input, SQL injection
-> cannot occur. [Wikipedia](http://en.wikipedia.org/wiki/Prepared_statement)
-
-Using a prepared statement will help avoid a [Bobby Tables](http://xkcd.com/327/) situation. It also
-caches the query plan, so you can call the query multiple times. It is slower for a single query,
-but faster if it is called multiple times.
-
-When using a prepared statement, you must use tokens in your query for parameters, and
-assign [types](https://github.com/patriksimek/node-mssql#data-types) to those parameters.
+The use of a prepared statement allows the database to cache the query plan. While it is slower for a single query, over multiple calls it will be faster. Prepared statements require parameterization and type assignment. See https://github.com/patriksimek/node-mssql#data-types for the types.
 
 Calling `Sql.ps` prepares a SQL query. Meaning, it will return a function that will execute the
-prepared statement. That function has a method that will unprepare the statement, namely
-`unprepare()`.
+prepared statement. The returned function has a method named `unprepare()` that will unprepare the statement and free the connection.
 
 #### Example:
 
