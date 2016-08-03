@@ -91,6 +91,6 @@ function storedProcedure (opts, cb) {
   });
 
   request.execute(opts.sp, function(err, recordsets, returnValue) {
-    return cb(err, recordsets)
+    return cb(err, recordsets, returnValue)
   });
 }
